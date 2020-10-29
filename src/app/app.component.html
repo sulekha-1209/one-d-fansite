@@ -1,9 +1,51 @@
-<div><h1>One Direction fansite!</h1></div>
-<!-- <div> Name : {{oneDData.name}}<div>
-<div>Followers: {{oneDData.followers}}</div>
-<div *ngFor="let img of oneDData.images">{{img.url}}</div> -->
+<div class="section section-basic">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-white">Welcome Directioners!</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="card card-plain card-info">
+          <h2>Song of the day</h2>
+          <div id="sotdImg">
+            <div class="row">
+              <div class="col-5" id="sotdImageDiv" style="margin: auto; position: relative;">
+                <img id="sotdImage" src={{SOTDAlbumData.images[0].url}} style="width: 100%; height: auto;">
+                <div id="sotdPlayOverlay" class="overlaySOTD">
+                  <a href="{{SOTDData.external_urls.spotify}}" target="_blank">
+                    <i class="far fa-play-circle sotdPlay" title="Play on Spotify"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <h3>{{SOTDData.name}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-plain card-info col">
+          <h2>Twitter feed</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col" *ngFor="let albumdata of oneDAlbums">
+          <div class="card card-album">
+            <!--<div class="card-header">
+              <h4 class="card-title">{{albumdata.name}}</h4>
+            </div> -->
+            <div class="card-body">
+               <img id="sotdImage" src={{albumdata.images[0].url}}
+                style="width: 100%; height: auto;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
 
-<div *ngFor="let prop of oneDData | keyvalue">
-   {{prop.key}} : {{ prop.value }} 
+    
   </div>
-
