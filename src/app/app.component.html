@@ -1,0 +1,9 @@
+<div><h1>One Direction fansite!</h1></div>
+<!-- <div> Name : {{oneDData.name}}<div>
+<div>Followers: {{oneDData.followers}}</div>
+<div *ngFor="let img of oneDData.images">{{img.url}}</div> -->
+
+<div *ngFor="let prop of oneDData | keyvalue">
+   {{prop.key}} : {{ prop.value }} 
+  </div>
+
