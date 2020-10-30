@@ -91,6 +91,13 @@ export class AppComponent implements OnInit {
     console.log(this.mainPlaylistData);
     const link = this.mainPlaylistData['external_urls']['spotify'];
     const tracks = this.mainPlaylistData['tracks'];
+    /* console.log(tracks);
+    for (let i = 0; i < tracks.items.length; i++) {
+      if (tracks.items[i].track.preview_url == null) {
+        console.log('No preview');
+        console.log(tracks.items[i]);
+      }
+    } */
     const songoftheday = this.getSongOfTheDay(tracks);
     console.log(link);
   }
@@ -112,10 +119,14 @@ export class AppComponent implements OnInit {
       sotdimgcard.style.cursor = 'pointer';
       sotdimage.style.filter = 'brightness(0.5)';
       sotdplayOverlay.style.opacity = '1';
-      music.play();
+      if (SOTDPreviewUrl != null) {
+        music.play();
+      }
     }, false);
     sotdimgcard.addEventListener('mouseout', function () {
-      music.pause();
+      if (SOTDPreviewUrl != null) {
+        music.pause();
+      }
       sotdimage.style.filter = 'brightness(1)';
       sotdplayOverlay.style.opacity = '0';
     }, false);

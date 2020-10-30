@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-8">
+      <div class="col-9">
         <div class="card card-plain card-info">
           <h2>Song of the day</h2>
           <div id="sotdImg">
@@ -23,29 +23,33 @@
             <h3>{{SOTDData.name}}</h3>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card card-plain card-info col">
-          <h2>Twitter feed</h2>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col" *ngFor="let albumdata of oneDAlbums">
-          <div class="card card-album">
-            <!--<div class="card-header">
-              <h4 class="card-title">{{albumdata.name}}</h4>
-            </div> -->
-            <div class="card-body">
-               <img id="sotdImage" src={{albumdata.images[0].url}}
-                style="width: 100%; height: auto;">
+        <div class="container">
+          <div class="row">
+            <div class="col" *ngFor="let albumdata of oneDAlbums">
+              <div class="card card-album">
+                <!--<div class="card-header">
+                  <h4 class="card-title">{{albumdata.name}}</h4>
+                </div> -->
+                <div class="card-body">
+                  <a href="{{albumdata.external_urls.spotify}}" target="_blank">
+                    <img id="sotdImage" src={{albumdata.images[0].url}} style="width: 100%; height: auto;">
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col">
+        <div class="card card-plain card-info col">
+          <h2>Memory Lane</h2>
+          <a class="twitter-timeline" href="https://twitter.com/todays1dhistory?ref_src=twsrc%5Etfw">Tweets by
+            todays1dhistory</a>
+        </div>
+      </div>
     </div>
-   
 
-    
+
+
+
   </div>
