@@ -3,9 +3,26 @@
     <h4 class="card-title">{{artistData.name}}</h4>
 </div>
 <div class="card-body">
-    <div><img src="{{artistData.images[0].url}}" alt="" class="card-image"></div>
+    <div style="padding:1rem"><img src="{{artistData.images[0].url}}" alt="" class="card-image"></div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-instagram"></i></button>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-twitter"></i></button>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-spotify"></i></button>
+        </div>
+        <div class="col"></div>
+        
+    </div>
+    
+    
     <div>
-       <div *ngFor="let track of topTracks"> 
+        <iframe style="padding-top: 2rem;" [src]=artistData.embedLink height="260" width="100%" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+ <!--     <div *ngFor="let track of topTracks"> 
            <div class="row track-content"  style="padding:1rem">
               <img class="col" src="{{track.album.images[2].url}}" alt="" class="track-image"> 
               <div class="col-4" style="margin:auto">{{track.name}}</div>
@@ -19,7 +36,7 @@
               </div>
               <div class="col-1" style="margin:auto"><i class="fa fa-play"></i></div>
            </div>
-        </div>  
+        </div> --> 
     </div>
 </div>
 

@@ -42,7 +42,7 @@
   }
 
   .twitterFeedCol {
-    max-height:200vh;
+    height: 100%;
     overflow-y: scroll;
   }
 

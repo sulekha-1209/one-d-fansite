@@ -14,8 +14,8 @@
     transform-style: preserve-3d;
   }
 
-  .track-image{
-      
+  .progress{
+      height: 0.1rem;
   }
   
   .track-content{

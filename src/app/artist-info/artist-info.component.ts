@@ -3,6 +3,7 @@ import {
   Input,
   OnInit
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   ArtistInfoService
 } from './../artist-info.service';
@@ -28,7 +29,7 @@ export class ArtistInfoComponent implements OnInit {
 
   showProgressDiv = [];
 
-  constructor(private artistService: ArtistInfoService) {}
+  constructor(private artistService: ArtistInfoService, private domSanitizer : DomSanitizer) {}
 
   ngOnInit() {
     this.load();
@@ -52,6 +53,9 @@ export class ArtistInfoComponent implements OnInit {
     console.log(artist);
     this.artistData = {};
     this.artistData.name = artist['name'];
+    this.artistData.id = this.artistId;
+    const embedLink = this.domSanitizer.bypassSecurityTrustResourceUrl( 'https://open.spotify.com/embed/artist/' + this.artistId);
+    this.artistData.embedLink = embedLink;
     this.artistData.spotifyLink = artist['external_urls']['spotify'];
     this.artistData.followers = artist['followers']['total'];
     this.artistData.genres = artist['genres'];
