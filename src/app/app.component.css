@@ -41,8 +41,8 @@
     text-align: center;
   }
 
-  .twitterFeedCol {
-    height: 100%;
+   .twitterFeedCol {
+    max-height:450vh;
     overflow-y: scroll;
   }
 

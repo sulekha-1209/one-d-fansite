@@ -5,17 +5,18 @@
 <div class="card-body">
     <div style="padding:1rem"><img src="{{artistData.images[0].url}}" alt="" class="card-image"></div>
     <div class="row">
-        <div class="col"></div>
-        <div class="col">
-            <button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-instagram"></i></button>
+        <div style="margin: auto;">
+            <a href={{artistData.socials.instagram}} target="_blank"><button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-instagram"></i></button></a> 
+            <a href={{artistData.socials.twitter}} target="_blank"><button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-twitter"></i></button></a> 
+            <a href={{artistData.socials.youtube}} target="_blank"><button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-youtube"></i></button></a> 
+            <a href={{artistData.socials.itunes}} target="_blank"><button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-itunes"></i></button></a> 
+            <a href={{artistData.spotifyLink}} target="_blank"><button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-spotify"></i></button></a> 
         </div>
-        <div class="col">
-            <button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-twitter"></i></button>
-        </div>
-        <div class="col">
-            <button class="btn btn-primary btn-icon btn-round mr-1" type="button"><i class="fab fa-spotify"></i></button>
-        </div>
-        <div class="col"></div>
+        
+        
+            
+        
+        
         
     </div>
     

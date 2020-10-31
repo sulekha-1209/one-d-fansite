@@ -38,6 +38,46 @@ export class AppComponent implements OnInit {
   harryArtistId = '6KImCVD70vtIoJWnq6nGn3';
   liamArtistId = '5pUo3fmmHT8bhCyHE52hA6';
 
+  harrySocials = {
+    'instagram' : 'https://www.instagram.com/harrystyles/',
+    'twitter': 'https://twitter.com/Harry_Styles',
+    'youtube': 'https://www.youtube.com/channel/UCZFWPqqPkFlNwIxcpsLOwew',
+    'itunes' : 'https://music.apple.com/us/artist/harry-styles/471260289'
+
+  };
+
+  louisSocials = {
+    'instagram' : 'https://www.instagram.com/louist91/',
+    'twitter': 'https://twitter.com/Louis_Tomlinson',
+    'youtube': 'https://www.youtube.com/channel/UCBSxVE6JoMg0WXvpm47OS3g',
+    'itunes' : 'https://music.apple.com/us/artist/louis-tomlinson/471260295'
+
+  };
+
+  niallSocials = {
+    'instagram' : 'https://www.instagram.com/niallhoran/',
+    'twitter': 'https://twitter.com/NiallOfficial',
+    'youtube': 'https://www.youtube.com/channel/UCQcTX6rX7JhUpHg_T3STtoQ',
+    'itunes' : 'https://music.apple.com/us/artist/niall-horan/471260298'
+
+  };
+
+  liamSocials = {
+    'instagram' : 'https://www.instagram.com/liampayne/',
+    'twitter': 'https://twitter.com/LiamPayne',
+    'youtube': 'https://www.youtube.com/channel/UCcG6pdVejvmvWSDRJfmeB8A',
+    'itunes' : 'https://music.apple.com/us/artist/liam-payne/366710817'
+
+  };
+
+  zaynSocials = {
+    'instagram' : 'https://www.instagram.com/zayn/',
+    'twitter': 'https://twitter.com/zaynmalik',
+    'youtube': 'https://www.youtube.com/channel/UC3PdiRW5dUA4V70ueeR1eHA',
+    'itunes' : 'https://music.apple.com/us/artist/zayn/973181994'
+
+  };
+
   genres: any;
 
   constructor(private http: HttpClient, private artistService: ArtistInfoService) {}

@@ -26,10 +26,10 @@
         <div class="container">
           <h2> Listen to the albums! </h2>
           <div class="row">           
-            <div class="col col-xs-6" *ngFor="let albumdata of oneDAlbums">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let albumdata of oneDAlbums">
               <a href="{{albumdata.external_urls.spotify}}" target="_blank">
                 <img class="img-fluid rounded glowonhover" title="Play {{albumdata.name}}" src={{albumdata.images[0].url}}
-                  style="width: 100%; height: auto;">
+                  style="padding:1rem; width: 100%; height: auto;">
               </a>
             </div>
           </div>
@@ -38,7 +38,7 @@
           <h2> Support the boys! </h2>
           <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-              <app-artist-info artistId={{harryArtistId}}></app-artist-info>
+              <app-artist-info artistId={{harryArtistId}} [socials]=harrySocials></app-artist-info>
             </div>
             <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
              <app-artist-info artistId={{louisArtistId}}></app-artist-info>
@@ -59,15 +59,19 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-0 hidden-xs col-lg-3" style="height:100%">
+      <div class="col-md-3 col-sm-0 hidden-xs col-lg-3">
         <h2>Memory Lane</h2>
         <div class="twitterFeedCol">
-          <a class="twitter-timeline" href="https://twitter.com/todays1dhistory?ref_src=twsrc%5Etfw">Tweets by
-            todays1dhistory</a>
+           <a class="twitter-timeline" href="https://twitter.com/todays1dhistory?ref_src=twsrc%5Etfw">Tweets by
+            todays1dhistory</a> 
         </div>
       </div>
     </div>
-
+    <div class="row">
+      <div class="card">
+        fanart carousel
+      </div>
+    </div>
 
 
 

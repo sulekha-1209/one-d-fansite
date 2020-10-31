@@ -18,6 +18,7 @@ import {
 export class ArtistInfoComponent implements OnInit {
 
   @Input() artistId: String = '6KImCVD70vtIoJWnq6nGn3';
+  @Input() socials: any = {};
   artistData: any;
   topTracks: any;
 
@@ -56,6 +57,7 @@ export class ArtistInfoComponent implements OnInit {
     this.artistData.id = this.artistId;
     const embedLink = this.domSanitizer.bypassSecurityTrustResourceUrl( 'https://open.spotify.com/embed/artist/' + this.artistId);
     this.artistData.embedLink = embedLink;
+    this.artistData.socials = this.socials;
     this.artistData.spotifyLink = artist['external_urls']['spotify'];
     this.artistData.followers = artist['followers']['total'];
     this.artistData.genres = artist['genres'];
