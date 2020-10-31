@@ -1,0 +1,28 @@
+<div class="card card-info">
+<div class="card-header">
+    <h4 class="card-title">{{artistData.name}}</h4>
+</div>
+<div class="card-body">
+    <div><img src="{{artistData.images[0].url}}" alt="" class="card-image"></div>
+    <div>
+       <div *ngFor="let track of topTracks"> 
+           <div class="row track-content"  style="padding:1rem">
+              <img class="col" src="{{track.album.images[2].url}}" alt="" class="track-image"> 
+              <div class="col-4" style="margin:auto">{{track.name}}</div>
+              <div class="col" style="margin:auto" *ngIf="track.preview_url" (mouseover)="playCurrentTrack(track, $event.target)" (mouseout)="pauseCurrentTrack(track)">
+              <p>Preview</p>
+              <audio src="{{track.preview_url}}" id="{{track.name}}"></audio>
+              <div [hidden]="!showProgressDivfunc(track.name)" id="{{track.name}}progress" class="progress">
+                <div id="{{track.name}}bar" class="progress-bar"></div>
+              </div>
+
+              </div>
+              <div class="col-1" style="margin:auto"><i class="fa fa-play"></i></div>
+           </div>
+        </div>  
+    </div>
+</div>
+
+</div>
+
+
