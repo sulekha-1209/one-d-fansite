@@ -1,17 +1,17 @@
 <div class="section section-basic">
-  <div class="container">
+  <div id="container" class="container">
     <div class="row">
       <div class="col-md-12">
         <h1 class="text-white">Welcome Directioners!</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-8">
+      <div class="col-md-9 col-sm-12 col-xs-12 col-lg-9">
         <div class="card card-plain card-info">
           <h2>Song of the day</h2>
           <div id="sotdImg">
             <div class="row">
-              <div class="col-5" id="sotdImageDiv" style="margin: auto; position: relative;">
+              <div class="col-4" id="sotdImageDiv" style="margin: auto; position: relative;">
                 <img id="sotdImage" src={{SOTDAlbumData.images[0].url}} style="width: 100%; height: auto;">
                 <div id="sotdPlayOverlay" class="overlaySOTD">
                   <a href="{{SOTDData.external_urls.spotify}}" target="_blank">
@@ -23,29 +23,77 @@
             <h3>{{SOTDData.name}}</h3>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card card-plain card-info col">
-          <h2>Twitter feed</h2>
+        <div class="container">
+          <h2> Listen to the albums! </h2>
+          <div class="row">
+            <div data-aos="fade-right" data-aos-duration="2000" data-aos-anchor-placement="top-bottom"
+              class="col-md-3 col-lg-3 col-xs-12 col-sm-6" *ngFor="let albumdata of oneDAlbums">
+              <a href="{{albumdata.external_urls.spotify}}" target="_blank">
+                <img class="img-fluid rounded glowonhover" title="Play {{albumdata.name}}"
+                  src={{albumdata.images[0].url}} style="padding:1rem; width: 100%; height: auto;">
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col" *ngFor="let albumdata of oneDAlbums">
-          <div class="card card-album">
-            <!--<div class="card-header">
-              <h4 class="card-title">{{albumdata.name}}</h4>
-            </div> -->
-            <div class="card-body">
-               <img id="sotdImage" src={{albumdata.images[0].url}}
-                style="width: 100%; height: auto;">
+        <div class="container">
+          <h2> Support the boys! </h2>
+          <div class="row">
+            <div data-aos="zoom-in-up" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <app-artist-info artistId={{harryArtistId}} [socials]=harrySocials></app-artist-info>
+            </div>
+            <div data-aos="zoom-in-up" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <app-artist-info artistId={{louisArtistId}}></app-artist-info>
+            </div>
+          </div>
+          <div class="row">
+            <div data-aos="zoom-in-up" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <app-artist-info artistId={{niallArtistId}}></app-artist-info>
+            </div>
+            <div data-aos="zoom-in-up" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <app-artist-info artistId={{liamArtistId}}></app-artist-info>
+            </div>
+          </div>
+          <div class="row">
+            <div data-aos="zoom-in-up" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <app-artist-info artistId={{zaynArtistId}}></app-artist-info>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-md-3 hidden-sm hidden-xs col-lg-3">
+        <h2>Memory Lane</h2>
+        <div class="twitterFeedCol">
+          <a class="twitter-timeline" href="https://twitter.com/todays1dhistory?ref_src=twsrc%5Etfw">Tweets by
+            todays1dhistory</a>
+        </div>
+      </div>
     </div>
-   
+    <div class="row">
+      <div class='card card-info'>
+        <h2>Fan Art Appreciation!</h2>
+        <div class="elfsight-app-6f722ebb-5861-465e-9676-9af3d5cb460b"></div>
+      </div>
+    </div>
 
-    
+    <div class="row">
+      <div class="col">
+        <div class='card card-info'>
+          <h2>Stay updated!</h2>
+          <iframe height="315px"
+            src="https://www.youtube.com/embed/videoseries?list=PLrccMMTUYc9ivjJBHzZsbY0vToyhOFYUm" frameborder="0"
+            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class='card card-info'>
+          <h2>Nostalgia</h2>
+          <iframe height="315px"
+            src="https://www.youtube.com/embed/videoseries?list=PLbatIuSsTsio2lEYr-qoRYyxC0sbwWpxy" frameborder="0"
+            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+
+    </div>
+
   </div>

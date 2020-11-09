@@ -8,6 +8,10 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 
+import {
+  ArtistInfoService
+} from './artist-info.service';
+
 
 @Component({
   selector: 'app-root',
@@ -16,8 +20,6 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'one-d-fansite';
-  clientId = 'c7996cd0ce934b838f1ac4f76a6958ec';
-  clientSecret = 'c3ca22531128448d87c9478a052f57c5';
   token: any;
 
   oneDArtistId = '4AK6F7OLvEQ5QYCBNiQWHq';
@@ -30,41 +32,78 @@ export class AppComponent implements OnInit {
 
   oneDAlbums: any;
 
+  zaynArtistId = '5ZsFI1h6hIdQRw2ti0hz81';
+  louisArtistId = '57WHJIHrjOE3iAxpihhMnp';
+  niallArtistId = '1Hsdzj7Dlq2I7tHP7501T4';
+  harryArtistId = '6KImCVD70vtIoJWnq6nGn3';
+  liamArtistId = '5pUo3fmmHT8bhCyHE52hA6';
+
+  harrySocials = {
+    'instagram' : 'https://www.instagram.com/harrystyles/',
+    'twitter': 'https://twitter.com/Harry_Styles',
+    'youtube': 'https://www.youtube.com/channel/UCZFWPqqPkFlNwIxcpsLOwew',
+    'itunes' : 'https://music.apple.com/us/artist/harry-styles/471260289'
+
+  };
+
+  louisSocials = {
+    'instagram' : 'https://www.instagram.com/louist91/',
+    'twitter': 'https://twitter.com/Louis_Tomlinson',
+    'youtube': 'https://www.youtube.com/channel/UCBSxVE6JoMg0WXvpm47OS3g',
+    'itunes' : 'https://music.apple.com/us/artist/louis-tomlinson/471260295'
+
+  };
+
+  niallSocials = {
+    'instagram' : 'https://www.instagram.com/niallhoran/',
+    'twitter': 'https://twitter.com/NiallOfficial',
+    'youtube': 'https://www.youtube.com/channel/UCQcTX6rX7JhUpHg_T3STtoQ',
+    'itunes' : 'https://music.apple.com/us/artist/niall-horan/471260298'
+
+  };
+
+  liamSocials = {
+    'instagram' : 'https://www.instagram.com/liampayne/',
+    'twitter': 'https://twitter.com/LiamPayne',
+    'youtube': 'https://www.youtube.com/channel/UCcG6pdVejvmvWSDRJfmeB8A',
+    'itunes' : 'https://music.apple.com/us/artist/liam-payne/366710817'
+
+  };
+
+  zaynSocials = {
+    'instagram' : 'https://www.instagram.com/zayn/',
+    'twitter': 'https://twitter.com/zaynmalik',
+    'youtube': 'https://www.youtube.com/channel/UC3PdiRW5dUA4V70ueeR1eHA',
+    'itunes' : 'https://music.apple.com/us/artist/zayn/973181994'
+
+  };
+
   genres: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private artistService: ArtistInfoService) {}
 
   ngOnInit() {
-    this.load();
+    this.load().then(() => {
+      const token = this.token['access_token'];
+      this.artistService.token = token;
+      console.log(this.artistService.token);
+      this.getOneDirectionInfo(token);
+      this.getMainPlaylist(token);
+      this.getOneDirectionAlbums(token);
+    });
   }
 
   async load() {
-    this.token = await this.requestToken();
+    this.token = await this.artistService.requestToken();
     // console.log(tokendata['access_token']);
     // console.log(this.token);
-    const token = this.token['access_token'];
-    // console.log(token);
-    this.getOneDirectionInfo(token);
-    this.getMainPlaylist(token);
-    this.getOneDirectionAlbums(token);
+
   }
 
-  requestToken() {
-    const url = 'https://accounts.spotify.com/api/token';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa(this.clientId + ':' + this.clientSecret)
-      })
-    };
-    const body = 'grant_type=client_credentials';
-    const tokenRequest = this.http.post(url, body, httpOptions);
-    return tokenRequest.toPromise();
-  }
 
   async getOneDirectionInfo(token: String) {
     console.log('Getting 1d artist info');
-    const oneD = await this.getArtist(this.oneDArtistId, token);
+    const oneD = await this.artistService.getArtist(this.oneDArtistId, token);
     console.log(oneD);
     this.oneDData = {};
     this.oneDData.name = oneD['name'];
@@ -82,15 +121,21 @@ export class AppComponent implements OnInit {
     this.oneDAlbums = oneDAlbums['items'].slice(0, 5);
     console.log(this.oneDAlbums);
 
-
   }
 
   async getMainPlaylist(token) {
-    this.mainPlaylistData = await this.getPlayList(this.mainPlaylistId, token);
+    this.mainPlaylistData = await this.artistService.getPlayList(this.mainPlaylistId, token);
     console.log('So are we displaying the main playlist? ');
     console.log(this.mainPlaylistData);
     const link = this.mainPlaylistData['external_urls']['spotify'];
     const tracks = this.mainPlaylistData['tracks'];
+    /* console.log(tracks);
+    for (let i = 0; i < tracks.items.length; i++) {
+      if (tracks.items[i].track.preview_url == null) {
+        console.log('No preview');
+        console.log(tracks.items[i]);
+      }
+    } */
     const songoftheday = this.getSongOfTheDay(tracks);
     console.log(link);
   }
@@ -110,12 +155,18 @@ export class AppComponent implements OnInit {
     const sotdplayOverlay = document.getElementById('sotdPlayOverlay');
     sotdimgcard.addEventListener('mouseover', function () {
       sotdimgcard.style.cursor = 'pointer';
+      sotdimage.classList.add('glow-shadow');
       sotdimage.style.filter = 'brightness(0.5)';
       sotdplayOverlay.style.opacity = '1';
-      music.play();
+      if (SOTDPreviewUrl != null) {
+        music.play();
+      }
     }, false);
     sotdimgcard.addEventListener('mouseout', function () {
-      music.pause();
+      if (SOTDPreviewUrl != null) {
+        music.pause();
+      }
+      sotdimage.classList.remove('glow-shadow');
       sotdimage.style.filter = 'brightness(1)';
       sotdplayOverlay.style.opacity = '0';
     }, false);
@@ -134,36 +185,6 @@ export class AppComponent implements OnInit {
     return randomTrackNum;
   }
 
-  getPlayList(playlistId: String, token: any) {
-    const url = 'https://api.spotify.com/v1/playlists/' + playlistId;
-    // console.log(token);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + token
-      })
-    };
-    const playlistReq = this.http.get(url, httpOptions);
-    return playlistReq.toPromise();
-
-  }
-
-  getArtist(artistId: String, token: any) {
-    const url = 'https://api.spotify.com/v1/artists/' + artistId;
-    // console.log(token);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + token
-      })
-    };
-    const artistReq = this.http.get(url, httpOptions);
-    artistReq.subscribe((artistdata) => {
-      // console.log(artistdata);
-    });
-    return artistReq.toPromise();
-
-  }
 
   getAlbums(artistId: String, token: any) {
     const url = 'https://api.spotify.com/v1/artists/' + artistId + '/albums';
@@ -201,7 +222,7 @@ export class AppComponent implements OnInit {
 
 
   async getCleanedUpArtistInfo(artistId, token) {
-    const artist = await this.getArtist(artistId, token);
+    const artist = await this.artistService.getArtist(artistId, token);
     const artistData = {};
   }
 
