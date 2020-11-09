@@ -10,6 +10,7 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -19,4 +20,15 @@
 </body>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+  console.log('Hereeee initialising AOS');
+  window.addEventListener('load', function (event) {
+    AOS.refresh();
+    console.log('HEREEEE refreshing AOS');
+  }, true /*Capture event*/ );
+
+</script>
+
 </html>
