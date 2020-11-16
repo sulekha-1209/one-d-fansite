@@ -18,5 +18,6 @@ This single-page Angular application uses the Spotify API to get the artist info
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
 
 Run `npm install` to install all the dependencies.
+
 Run `ng serve`  for a dev server ( or `npm start` ). Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
