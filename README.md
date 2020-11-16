@@ -7,11 +7,11 @@ This single-page Angular application uses the Spotify API to get the artist info
 
 ## Features/Sections
 
-Song of the Day - Gets a random song from the main One Direction playlist - plays the preview on hover.
-This Day in OneD history - Twitter feed of the famous account of the same name
-Artist profiles - Images and latest songs using the Spotify api + Spotify widget.
-Fan art section - Widget used for images on Instagram tagged #OneDirectionFanArt
-Videos - Youtube playlist embeds for nostalgic videos 
+* Song of the Day - Gets a random song from the main One Direction playlist - plays the preview on hover.
+* This Day in OneD history - Twitter feed of the famous account of the same name
+* Artist profiles - Images and latest songs using the Spotify api + Spotify widget.
+* Fan art section - Widget used for images on Instagram tagged #OneDirectionFanArt
+* Videos - Youtube playlist embeds for nostalgic videos 
 
 ## Installing
 
