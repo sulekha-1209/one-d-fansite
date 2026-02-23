@@ -74,45 +74,9 @@ export class AppComponent implements OnInit {
     'itunes': 'https://music.apple.com/us/artist/zayn/973181994'
   };
 
-  // Curated fan art from DeviantArt public gallery links
-  fanArtItems = [
-    {
-      url: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80',
-      alt: 'Concert crowd',
-      credit: 'Concert vibes 🎤',
-      link: 'https://www.deviantart.com/tag/onedirection'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&q=80',
-      alt: 'Stage lights',
-      credit: 'Stage lights ✨',
-      link: 'https://www.deviantart.com/tag/onedirection'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&q=80',
-      alt: 'Crowd at concert',
-      credit: 'Directioner crowd 💚',
-      link: 'https://www.instagram.com/explore/tags/onedirectionfanart/'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1468359601543-843bfaef291a?w=400&q=80',
-      alt: 'Music performance',
-      credit: 'Music magic 🎵',
-      link: 'https://www.instagram.com/explore/tags/onedirectionfanart/'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=400&q=80',
-      alt: 'Concert atmosphere',
-      credit: 'Live concert 🎶',
-      link: 'https://www.deviantart.com/tag/onedirection'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=400&q=80',
-      alt: 'Music fan',
-      credit: 'Fan love 💙',
-      link: 'https://www.instagram.com/explore/tags/onedirectionfanart/'
-    }
-  ];
+  fanArtItems = [];
+  fanArtLoading = true;
+  tumblrApiKey = 'hBv6t5KxEx36Kv9DMQWSO7bhMEIQHZ3G1yhBpbG7HVRQWMDz7S';
 
   constructor(private http: HttpClient, private artistService: ArtistInfoService) {}
 
@@ -125,6 +89,35 @@ export class AppComponent implements OnInit {
       this.getOneDirectionAlbums(token);
     }).catch(err => {
       console.error('Failed to load Spotify token.', err);
+    });
+    this.loadTumblrFanArt();
+  }
+
+  loadTumblrFanArt() {
+    const tag = 'onedirectionfanart';
+    const url = `https://corsproxy.io/?${encodeURIComponent(
+      `https://api.tumblr.com/v2/tagged?tag=${tag}&api_key=${this.tumblrApiKey}&limit=12`
+    )}`;
+    this.http.get(url).subscribe((response: any) => {
+      const posts = response.response || [];
+      const artItems = [];
+      for (const post of posts) {
+        // Only use photo posts that have photos
+        if (post.type === 'photo' && post.photos && post.photos.length > 0) {
+          artItems.push({
+            url: post.photos[0].original_size.url,
+            alt: post.summary || 'One Direction fan art',
+            credit: post.blog_name,
+            link: post.post_url
+          });
+        }
+        if (artItems.length >= 9) { break; }
+      }
+      this.fanArtItems = artItems;
+      this.fanArtLoading = false;
+    }, err => {
+      console.error('Failed to load Tumblr fan art', err);
+      this.fanArtLoading = false;
     });
   }
 

@@ -94,18 +94,34 @@
     <div class="row">
       <div class='card card-info' style="width:100%">
         <h2>Fan Art Appreciation!</h2>
-        <div class="fan-art-grid">
+
+        <!-- Loading state -->
+        <div *ngIf="fanArtLoading" style="padding: 1rem;">
+          <p class="text-white">Loading fan art...</p>
+        </div>
+
+        <!-- No results -->
+        <div *ngIf="!fanArtLoading && fanArtItems.length === 0" style="padding: 1rem;">
+          <p class="text-white">No fan art found right now — check out
+            <a href="https://www.tumblr.com/tagged/onedirectionfanart" target="_blank" style="color:#e91e63;">#onedirectionfanart on Tumblr</a>!
+          </p>
+        </div>
+
+        <!-- Fan art grid -->
+        <div class="fan-art-grid" *ngIf="!fanArtLoading && fanArtItems.length > 0">
           <div class="fan-art-item" *ngFor="let art of fanArtItems">
-            <a href="{{art.link}}" target="_blank" title="{{art.credit}}">
+            <a href="{{art.link}}" target="_blank" title="by {{art.credit}}">
               <img src="{{art.url}}" alt="{{art.alt}}" class="fan-art-img">
               <div class="fan-art-overlay">
-                <p>{{art.credit}}</p>
+                <p>by {{art.credit}}</p>
               </div>
             </a>
           </div>
         </div>
+
         <p class="text-white" style="padding: 0.5rem 1rem; font-size: 0.8rem; opacity: 0.7;">
-          Share your art with <a href="https://www.instagram.com/explore/tags/onedirectionfanart/" target="_blank" style="color:#e91e63;">#OneDirectionFanArt</a>
+          Live from <a href="https://www.tumblr.com/tagged/onedirectionfanart" target="_blank" style="color:#e91e63;">#onedirectionfanart on Tumblr</a>
+          · Share your art with that tag to be featured!
         </p>
       </div>
     </div>
