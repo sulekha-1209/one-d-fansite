@@ -24,7 +24,7 @@
             </div>
             <h3>{{SOTDData.name}}</h3>
             <p class="text-muted" *ngIf="!SOTDHasPreview" style="font-size:0.85rem;">
-              (No audio preview available for this track — click the album art to open in Spotify)
+              (No audio preview available — click the album art to open in Spotify)
             </p>
           </div>
           <div *ngIf="!SOTDData" style="padding: 1rem;">
@@ -74,18 +74,21 @@
 
       </div>
 
-      <!-- Twitter / Memory Lane sidebar -->
+      <!-- Memory Lane sidebar — this day in 1D history -->
       <div class="col-md-3 hidden-sm hidden-xs col-lg-3">
         <h2>Memory Lane</h2>
+        <p class="memory-subtitle">This day in 1D history — next 30 days</p>
         <div class="twitterFeedCol">
-          <!-- Live Twitter embedded timeline for @todays1dhistory -->
-          <a class="twitter-timeline"
-             href="https://x.com/todays1dhistory"
-             data-theme="dark"
-             data-height="600"
-             data-chrome="noheader nofooter noborders transparent">
-            Tweets by todays1dhistory
-          </a>
+          <div *ngIf="memoryLaneItems.length === 0" class="memory-lane-card">
+            <p class="memory-text">No recorded events in the next 30 days. Check back soon!</p>
+          </div>
+          <div class="memory-lane-card" [class.memory-today]="memory.isToday" *ngFor="let memory of memoryLaneItems">
+            <p class="memory-date">
+              <span *ngIf="memory.isToday" class="today-badge">TODAY</span>
+              {{memory.date}} · {{memory.year}}
+            </p>
+            <p class="memory-text">{{memory.event}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -94,20 +97,14 @@
     <div class="row">
       <div class='card card-info' style="width:100%">
         <h2>Fan Art Appreciation!</h2>
-
-        <!-- Loading state -->
         <div *ngIf="fanArtLoading" style="padding: 1rem;">
           <p class="text-white">Loading fan art...</p>
         </div>
-
-        <!-- No results -->
         <div *ngIf="!fanArtLoading && fanArtItems.length === 0" style="padding: 1rem;">
           <p class="text-white">No fan art found right now — check out
             <a href="https://www.tumblr.com/tagged/onedirectionfanart" target="_blank" style="color:#e91e63;">#onedirectionfanart on Tumblr</a>!
           </p>
         </div>
-
-        <!-- Fan art grid -->
         <div class="fan-art-grid" *ngIf="!fanArtLoading && fanArtItems.length > 0">
           <div class="fan-art-item" *ngFor="let art of fanArtItems">
             <a href="{{art.link}}" target="_blank" title="by {{art.credit}}">
@@ -118,7 +115,6 @@
             </a>
           </div>
         </div>
-
         <p class="text-white" style="padding: 0.5rem 1rem; font-size: 0.8rem; opacity: 0.7;">
           Live from <a href="https://www.tumblr.com/tagged/onedirectionfanart" target="_blank" style="color:#e91e63;">#onedirectionfanart on Tumblr</a>
           · Share your art with that tag to be featured!
@@ -139,7 +135,6 @@
           </iframe>
         </div>
       </div>
-
       <div class="col">
         <div class='card card-video'>
           <h2 class="color-primary">Nostalgia</h2>

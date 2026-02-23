@@ -153,3 +153,51 @@
     width: calc(50% - 0.375rem);
   }
 }
+
+/* Memory Lane */
+.memory-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin: -0.75rem 0 0.75rem 0;
+}
+
+.memory-lane-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #e91e63;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.6rem;
+  transition: background 0.2s;
+}
+
+.memory-today {
+  background: rgba(233, 30, 99, 0.15) !important;
+  border-left: 3px solid #ff4081 !important;
+  box-shadow: 0 0 10px rgba(233, 30, 99, 0.2);
+}
+
+.today-badge {
+  background: #e91e63;
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+  letter-spacing: 0.05em;
+}
+
+.memory-date {
+  font-size: 0.72rem;
+  color: #e91e63;
+  margin: 0 0 0.2rem 0;
+  font-weight: 600;
+}
+
+.memory-text {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.4;
+}
