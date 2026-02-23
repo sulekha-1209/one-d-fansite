@@ -10,12 +10,19 @@ import {
 export class ArtistInfoService {
 
   constructor(private http: HttpClient) { }
+
+  // NOTE: For a production app, move token fetching to a backend proxy.
+  // The Client Credentials flow is blocked by CORS from the browser directly,
+  // so we use a CORS proxy to relay the request to Spotify's token endpoint.
   clientId = 'c7996cd0ce934b838f1ac4f76a6958ec';
   clientSecret = 'c3ca22531128448d87c9478a052f57c5';
   token: any;
 
   requestToken() {
-    const url = 'https://accounts.spotify.com/api/token';
+    // allorigins.win proxies the request and adds CORS headers, allowing browser-side Client Credentials flow
+    const spotifyTokenUrl = 'https://accounts.spotify.com/api/token';
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(spotifyTokenUrl);
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -23,55 +30,40 @@ export class ArtistInfoService {
       })
     };
     const body = 'grant_type=client_credentials';
-    const tokenRequest = this.http.post(url, body, httpOptions);
+    const tokenRequest = this.http.post(proxyUrl, body, httpOptions);
     return tokenRequest.toPromise();
   }
 
   getArtist(artistId: String, token: any) {
     const url = 'https://api.spotify.com/v1/artists/' + artistId;
-    console.log(token);
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Bearer ' + token
       })
     };
     const artistReq = this.http.get(url, httpOptions);
-    artistReq.subscribe((artistdata) => {
-      console.log(artistdata);
-    });
     return artistReq.toPromise();
-
   }
 
   getPlayList(playlistId: String, token: any) {
     const url = 'https://api.spotify.com/v1/playlists/' + playlistId;
-    // console.log(token);
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Bearer ' + token
       })
     };
     const playlistReq = this.http.get(url, httpOptions);
     return playlistReq.toPromise();
-
   }
 
   getTopTracksofArtist(artistId: String, token: any) {
-    const url = 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?market=es';
-    console.log(token);
+    const url = 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?market=US';
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Bearer ' + token
       })
     };
     const artistTracksReq = this.http.get(url, httpOptions);
-    artistTracksReq.subscribe((artisttrackdata) => {
-      console.log(artisttrackdata);
-    });
     return artistTracksReq.toPromise();
-
   }
 }
