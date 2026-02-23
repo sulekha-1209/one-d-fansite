@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   oneDArtistId = '4AK6F7OLvEQ5QYCBNiQWHq';
   oneDData: any;
-  mainPlaylistId = '37i9dQZF1DX6p4TJxzMRDe';
+  mainPlaylistId = '7oQ95gJoLpibKztdyLF3nB';
   mainPlaylistData: any;
 
   SOTDData: any;
