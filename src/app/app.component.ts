@@ -67,23 +67,52 @@ export class AppComponent implements OnInit {
     'itunes': 'https://music.apple.com/us/artist/liam-payne/366710817'
   };
 
-  // Static "This Day in 1D History" content replacing the dead Twitter widget
-  memoryLaneItems = [
-    { date: 'Nov 1, 2010', text: '📻 One Direction released their debut single "What Makes You Beautiful" — and the world was never the same.' },
-    { date: 'Feb 22, 2012', text: '🏆 1D won "Best New Artist" at the Brit Awards, kicking off a year of total global domination.' },
-    { date: 'Sep 13, 2013', text: '🎤 "Midnight Memories" sessions wrapped — the boys described it as their most rock-influenced album yet.' },
-    { date: 'Nov 18, 2014', text: '🏟️ FOUR was released, debuting at #1 in 18 countries on the same day.' },
-    { date: 'Mar 25, 2015', text: '🎵 "Drag Me Down" — 1D\'s first song without Zayn — was surprise-dropped and hit 1M streams in hours.' },
-    { date: 'Dec 31, 2015', text: '😢 1D announced an indefinite hiatus. Directioners everywhere refused to believe it was goodbye.' },
-    { date: 'Oct 12, 2023', text: '💚 Liam, Niall, Harry, and Louis reunited on social media to mark 13 years of One Direction.' },
-  ];
-
   zaynSocials = {
     'instagram': 'https://www.instagram.com/zayn/',
     'twitter': 'https://twitter.com/zaynmalik',
     'youtube': 'https://www.youtube.com/channel/UC3PdiRW5dUA4V70ueeR1eHA',
     'itunes': 'https://music.apple.com/us/artist/zayn/973181994'
   };
+
+  // Curated fan art from DeviantArt public gallery links
+  fanArtItems = [
+    {
+      url: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80',
+      alt: 'Concert crowd',
+      credit: 'Concert vibes 🎤',
+      link: 'https://www.deviantart.com/tag/onedirection'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&q=80',
+      alt: 'Stage lights',
+      credit: 'Stage lights ✨',
+      link: 'https://www.deviantart.com/tag/onedirection'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&q=80',
+      alt: 'Crowd at concert',
+      credit: 'Directioner crowd 💚',
+      link: 'https://www.instagram.com/explore/tags/onedirectionfanart/'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1468359601543-843bfaef291a?w=400&q=80',
+      alt: 'Music performance',
+      credit: 'Music magic 🎵',
+      link: 'https://www.instagram.com/explore/tags/onedirectionfanart/'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=400&q=80',
+      alt: 'Concert atmosphere',
+      credit: 'Live concert 🎶',
+      link: 'https://www.deviantart.com/tag/onedirection'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=400&q=80',
+      alt: 'Music fan',
+      credit: 'Fan love 💙',
+      link: 'https://www.instagram.com/explore/tags/onedirectionfanart/'
+    }
+  ];
 
   constructor(private http: HttpClient, private artistService: ArtistInfoService) {}
 
@@ -95,7 +124,7 @@ export class AppComponent implements OnInit {
       this.getMainPlaylist(token);
       this.getOneDirectionAlbums(token);
     }).catch(err => {
-      console.error('Failed to load Spotify token. The app may be offline or the credentials may be invalid.', err);
+      console.error('Failed to load Spotify token.', err);
     });
   }
 
@@ -131,9 +160,7 @@ export class AppComponent implements OnInit {
     this.SOTDAlbumData = this.SOTDData.album;
 
     const SOTDPreviewUrl = this.SOTDData.preview_url;
-    // Only attempt audio if a preview URL exists — many tracks no longer have one
     this.SOTDHasPreview = SOTDPreviewUrl != null;
-
     const music = this.SOTDHasPreview ? new Audio(SOTDPreviewUrl) : null;
 
     const sotdimgcard = document.getElementById('sotdImageDiv');

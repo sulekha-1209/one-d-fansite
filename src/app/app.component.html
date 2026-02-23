@@ -74,14 +74,18 @@
 
       </div>
 
-      <!-- Memory Lane (replaced dead Twitter widget with static content) -->
+      <!-- Twitter / Memory Lane sidebar -->
       <div class="col-md-3 hidden-sm hidden-xs col-lg-3">
         <h2>Memory Lane</h2>
         <div class="twitterFeedCol">
-          <div class="memory-lane-card" *ngFor="let memory of memoryLaneItems">
-            <p class="memory-date">{{memory.date}}</p>
-            <p class="memory-text">{{memory.text}}</p>
-          </div>
+          <!-- Live Twitter embedded timeline for @todays1dhistory -->
+          <a class="twitter-timeline"
+             href="https://twitter.com/todays1dhistory"
+             data-theme="dark"
+             data-height="600"
+             data-chrome="noheader nofooter noborders transparent">
+            Tweets by todays1dhistory
+          </a>
         </div>
       </div>
     </div>
@@ -90,11 +94,18 @@
     <div class="row">
       <div class='card card-info' style="width:100%">
         <h2>Fan Art Appreciation!</h2>
-        <p class="text-white" style="padding: 0 1rem;">
-          Check out incredible One Direction fan art on
-          <a href="https://www.instagram.com/explore/tags/onedirectionfanart/" target="_blank" style="color:#e91e63;">#OneDirectionFanArt on Instagram</a>
-          and
-          <a href="https://www.deviantart.com/tag/onedirection" target="_blank" style="color:#e91e63;">DeviantArt</a>.
+        <div class="fan-art-grid">
+          <div class="fan-art-item" *ngFor="let art of fanArtItems">
+            <a href="{{art.link}}" target="_blank" title="{{art.credit}}">
+              <img src="{{art.url}}" alt="{{art.alt}}" class="fan-art-img">
+              <div class="fan-art-overlay">
+                <p>{{art.credit}}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <p class="text-white" style="padding: 0.5rem 1rem; font-size: 0.8rem; opacity: 0.7;">
+          Share your art with <a href="https://www.instagram.com/explore/tags/onedirectionfanart/" target="_blank" style="color:#e91e63;">#OneDirectionFanArt</a>
         </p>
       </div>
     </div>
